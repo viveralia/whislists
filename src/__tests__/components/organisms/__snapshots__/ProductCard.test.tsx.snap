@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<article>
+  <h3>
+    Product 1
+  </h3>
+  <button
+    onClick={[Function]}
+  >
+    Edit
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+  <a
+    className="block"
+    href="https://google.com"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <img
+      alt="Product 1"
+      src="https://google.com"
+    />
+  </a>
+</article>
+`;

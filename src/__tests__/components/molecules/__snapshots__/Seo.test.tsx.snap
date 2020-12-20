@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<HelmetWrapper
+  defer={true}
+  encodeSpecialCharacters={true}
+>
+  <title>
+    Test
+     | 
+    Wishlistify
+  </title>
+  <meta
+    content="Create wishlists and add products from all around the web. Share with your friends."
+    name="description"
+  />
+</HelmetWrapper>
+`;
