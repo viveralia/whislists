@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 
+import { UserContext } from "../../context";
 import { Product } from "../../services/products";
 
 export interface ProductCardProps {
@@ -9,11 +10,17 @@ export interface ProductCardProps {
 }
 
 const ProductCard: FC<ProductCardProps> = ({ product, onDelete, onEdit }) => {
+  const user = useContext(UserContext);
+
   return (
     <article>
       <h3>{product.name}</h3>
-      <button onClick={onEdit}>Edit</button>
-      <button onClick={onDelete}>Remove</button>
+      {product.createdBy.id === user?.uid && (
+        <div>
+          <button onClick={onEdit}>Edit</button>
+          <button onClick={onDelete}>Remove</button>
+        </div>
+      )}
       <a
         className="block"
         href={product.url}
@@ -22,6 +29,7 @@ const ProductCard: FC<ProductCardProps> = ({ product, onDelete, onEdit }) => {
       >
         <img src={product.imageUrl} alt={product.name} />
       </a>
+      <p>Added by: {product.createdBy.name}</p>
     </article>
   );
 };

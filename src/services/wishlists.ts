@@ -16,6 +16,7 @@ export interface WishList {
     id: string;
     name: string;
   };
+  members: string[];
 }
 
 export interface NewWishList extends Pick<WishList, "name" | "description"> {
@@ -34,7 +35,17 @@ export async function createWishList(
       name: user.displayName,
       id: user.uid,
     },
+    members: [user.uid],
     createdAt: serverTimestamp(),
+  });
+}
+
+export async function joinWishList(
+  newMember: firebase.User,
+  wishList: WishList
+) {
+  return await wishListsRef.doc(wishList.id).update({
+    members: firebase.firestore.FieldValue.arrayUnion(newMember.uid),
   });
 }
 
@@ -43,7 +54,7 @@ export function suscribeToUserWishLists(
   saveCallback: (wishLists: WishList[]) => void
 ) {
   return wishListsRef
-    .where("createdBy.id", "==", user.uid)
+    .where("members", "array-contains", user.uid)
     .onSnapshot((snap) => {
       const wishLists = snap.docs.map((doc) => ({
         id: doc.id,
